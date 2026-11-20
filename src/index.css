@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Hind Siliguri", system-ui, -apple-system, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Hind Siliguri", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --brand-primary: #663CBC;
+  --brand-primary-light: #7F48CD;
+  --brand-primary-hover: #562EA8;
+  --brand-secondary: #081149;
+  --brand-accent: #2563EB;
+  --site-bg: #EDF4FF;
+  --brand-tint: rgba(102, 60, 188, 0.08);
+  --site-font-body: "Plus Jakarta Sans", "Hind Siliguri", system-ui, -apple-system, sans-serif;
+  --site-font-heading: "Plus Jakarta Sans", "Hind Siliguri", system-ui, sans-serif;
+  --theme-btn-radius: 10px;
+  --theme-card-radius: 12px;
+  --theme-card-shadow: 0.5px 2.5px 0 -1px var(--brand-primary), 0 6px 20px rgba(15, 23, 42, 0.05);
+  --theme-container-max: 1240px;
+  --theme-heading-weight: 800;
+  --site-font-scale: 1;
+  --store-card-bg: #FFFFFF;
+  --store-card-border: #DDDDEF;
+  --store-text-primary: #081149;
+  --store-text-muted: #5E6484;
+  --store-subtle-bg: #F1F6FF;
+}
+
+[data-store-surface="warm-ivory"] {
+  --store-card-bg: #FFFDF8;
+  --store-card-border: #E8E0D2;
+  --store-text-primary: #292018;
+  --store-text-muted: #6D5D4B;
+  --store-subtle-bg: #F7F1E5;
+}
+
+[data-store-surface="dark-slate"] {
+  --store-card-bg: #171B26;
+  --store-card-border: #283042;
+  --store-text-primary: #F1F5F9;
+  --store-text-muted: #94A3B8;
+  --store-subtle-bg: #1E2433;
+}
+
+@layer base {
+  html {
+    font-family: var(--site-font-body);
+  }
+  h1, h2, h3, .font-heading-template {
+    font-family: var(--site-font-heading);
+    font-weight: var(--theme-heading-weight);
+  }
+}
+
+.brand-bg {
+  background-color: var(--brand-primary);
+}
+.brand-bg:hover {
+  background-color: var(--brand-primary-hover);
+}
+.brand-text {
+  color: var(--brand-primary);
+}
+.brand-border {
+  border-color: var(--brand-primary);
+}
+.brand-tint-bg {
+  background-color: var(--brand-tint);
+}
+.brand-accent-text {
+  color: var(--brand-accent);
+}
+.brand-accent-bg {
+  background-color: var(--brand-accent);
+}
+.brand-gradient {
+  background: linear-gradient(135deg, var(--brand-primary-light, #7F48CD) 0%, var(--brand-primary) 55%, var(--brand-secondary) 100%);
+}
+.site-canvas {
+  background-color: var(--site-bg);
+  background-image: linear-gradient(180deg, #F1F6FF 0%, #F2F3FD 55%, #EFF7FF 100%);
+  color: var(--store-text-primary);
+}
+[data-store-surface="warm-ivory"].site-canvas,
+[data-store-surface="dark-slate"].site-canvas {
+  background-image: none;
+}
+.theme-surface-card {
+  background-color: var(--store-card-bg);
+  border-color: var(--store-card-border);
+  border-radius: var(--theme-card-radius);
+  box-shadow: var(--theme-card-shadow);
+  color: var(--store-text-primary);
+}
+.theme-btn-shape {
+  border-radius: var(--theme-btn-radius);
+}
+.theme-container {
+  max-width: var(--theme-container-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* White at Top -> Translucent Frosted Glass on Scroll (products faintly visible behind) */
+.ot-header-frosted {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E3E6ED;
+}
+.ot-header-frosted-scrolled {
+  background: rgba(255, 255, 255, 0.56);
+  -webkit-backdrop-filter: blur(11px) saturate(165%);
+  backdrop-filter: blur(11px) saturate(165%);
+  border-bottom: 1px solid rgba(221, 221, 239, 0.72);
+  box-shadow: 0 8px 24px rgba(8, 17, 73, 0.06);
+}
+
+/* OfferTopUp Signature Gradient Action Buttons */
+.ot-gradient-btn {
+  background-image: linear-gradient(150deg, var(--brand-primary-light, #7F48CD) 0%, var(--brand-primary) 100%);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--brand-primary) 28%, transparent);
+  color: #FFFFFF;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, filter 0.22s ease;
+}
+.ot-gradient-btn:hover {
+  background-image: linear-gradient(150deg, var(--brand-primary) 0%, var(--brand-primary-light, #7F48CD) 100%);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--brand-primary) 36%, transparent);
+  transform: translateY(-1px);
+}
+.ot-blue-btn {
+  background-image: linear-gradient(135deg, #2297FF 0%, #0F6FD8 100%);
+  box-shadow: 0 6px 16px rgba(15, 111, 216, 0.25);
+  color: #FFFFFF;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+}
+.ot-blue-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 111, 216, 0.35);
+}
+.ot-emerald-btn {
+  background-image: linear-gradient(135deg, #25D366 0%, #138F47 100%);
+  color: #FFFFFF;
+}
+
+/* OfferTopUp Signature Card Surface (.single-game-product-2 style) */
+.ot-product-card {
+  background: var(--store-card-bg);
+  border: 1px solid var(--store-card-border);
+  border-radius: var(--theme-card-radius, 12px);
+  box-shadow: 0.5px 2.5px 0 -1px var(--brand-primary), 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.ot-product-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--brand-primary) 55%, var(--store-card-border));
+  box-shadow: 0.5px 3px 0 -1px var(--brand-primary), 0 16px 32px color-mix(in srgb, var(--brand-primary) 14%, transparent);
+}
+
+/* Falaq Food Exact Category Card Surface */
+.falaq-category-card {
+  background: #ffffff;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(145, 158, 171, 0.16), 0 6px 12px -8px rgba(16, 24, 40, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.falaq-category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(23, 157, 85, 0.36), 0 10px 14px -10px rgba(23, 157, 85, 0.40);
+}
+.falaq-category-card-active {
+  background: #f0fdf4;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 0 2px #159758, 0 10px 14px -10px rgba(23, 157, 85, 0.35);
+}
+
+/* OfferTopUp Exact Keyframe Animations */
+@keyframes otNoticePulse {
+  0% {
+    opacity: 0.82;
+    transform: scale(0.8);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+@keyframes otNoticeSlide {
+  0%, 18% {
+    transform: translateX(0%);
+  }
+  82%, 100% {
+    transform: translateX(-22%);
+  }
+}
+
+@keyframes otArrowMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes otArrowColor {
+  0% {
+    color: #2563EB;
+  }
+  25% {
+    color: #E11D48;
+  }
+  50% {
+    color: #F97316;
+  }
+  75% {
+    color: #16A34A;
+  }
+  100% {
+    color: #2563EB;
+  }
+}
+
+@keyframes otSupportPulse {
+  0% {
+    opacity: 0.82;
+    transform: scale(0.86);
+  }
+  48% {
+    opacity: 0.34;
+    transform: scale(1.18);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.38);
+  }
+}
+
+@keyframes otShimmerSweep {
+  0% {
+    background-position: -150% 0;
+  }
+  100% {
+    background-position: 250% 0;
+  }
+}
+
+@keyframes otFadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ot-notice-bar {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FBFDFF 100%);
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 18%, #E5E7EB);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.ot-notice-bar-scrolled {
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(160%);
+  border-color: color-mix(in srgb, var(--brand-primary) 26%, rgba(221, 221, 239, 0.85));
+  box-shadow: 0 8px 20px rgba(8, 17, 73, 0.08);
+}
+.ot-notice-bar:hover {
+  border-color: color-mix(in srgb, var(--brand-primary) 42%, #E5E7EB);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 26px color-mix(in srgb, var(--brand-primary) 10%, transparent);
+}
+.ot-notice-pulse {
+  animation: otNoticePulse 1.8s ease-out infinite;
+}
+.ot-notice-slide {
+  display: inline-block;
+  white-space: nowrap;
+  animation: otNoticeSlide 14s ease-in-out infinite alternate;
+}
+.ot-notice-bar:hover .ot-notice-slide {
+  animation-play-state: paused;
+}
+.ot-arrow-animated {
+  animation: otArrowMove 0.75s ease-in-out infinite alternate, otArrowColor 4s linear infinite;
+}
+.ot-shimmer-banner {
+  background-image: linear-gradient(115deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0) 65%);
+  background-size: 220% 100%;
+  animation: otShimmerSweep 4.5s ease-in-out infinite;
+}
+.ot-support-ring-1 {
+  animation: otSupportPulse 2.05s ease-out infinite;
+}
+.ot-support-ring-2 {
+  animation: otSupportPulse 2.05s ease-out 1.02s infinite;
+}
+.ot-dropdown-enter {
+  animation: otFadeSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

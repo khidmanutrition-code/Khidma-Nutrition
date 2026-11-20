@@ -1,0 +1,921 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "An organic food product sold in Khidmatul Ummah Shop BD.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "sku": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "barcode": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "englishName": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "shortDesc": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "category": {
+          "type": "string",
+          "enum": [
+            "patali",
+            "danadar",
+            "jhola",
+            "combo",
+            "honey",
+            "ghee-oil",
+            "dates-nuts",
+            "spices-seeds"
+          ]
+        },
+        "categoryLabel": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "brand": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "wholesalePrice": { "type": "number" },
+        "minWholesaleQty": { "type": "number" },
+        "costPrice": { "type": "number" },
+        "discountPercent": { "type": "number" },
+        "soldCount": { "type": "number" },
+        "stockLeft": { "type": "number" },
+        "promoLabel": { "type": "string", "maxLength": 100 },
+        "tag": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "badge": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "inStock": { "type": "boolean" },
+        "isHotDeal": { "type": "boolean" },
+        "isFeatured": { "type": "boolean" },
+        "isBestSeller": { "type": "boolean" },
+        "isNewArrival": { "type": "boolean" },
+        "image": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "videoUrl": { "type": "string", "maxLength": 500 },
+        "gallery": { "type": "array" },
+        "origin": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "description": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "features": { "type": "array" },
+        "specifications": { "type": "array" },
+        "variants": { "type": "array" },
+        "sellerId": { "type": "string", "maxLength": 100 },
+        "sellerName": { "type": "string", "maxLength": 140 },
+        "isMall": { "type": "boolean" },
+        "freeShipping": { "type": "boolean" },
+        "warrantyLabel": { "type": "string", "maxLength": 140 },
+        "colorLabel": { "type": "string", "maxLength": 60 },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "sku",
+        "name",
+        "englishName",
+        "shortDesc",
+        "category",
+        "categoryLabel",
+        "brand",
+        "price",
+        "soldCount",
+        "tag",
+        "badge",
+        "inStock",
+        "image",
+        "gallery",
+        "origin",
+        "description",
+        "features",
+        "variants",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer purchase order managed in the storefront and admin dashboard.",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "customerEmail": { "type": "string", "maxLength": 160 },
+        "customerName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "phone": { "type": "string", "minLength": 6, "maxLength": 30 },
+        "address": { "type": "string", "minLength": 3, "maxLength": 400 },
+        "upazila": { "type": "string", "maxLength": 120 },
+        "zone": { "type": "string", "enum": ["dhaka", "outside"] },
+        "zoneLabel": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "paymentMethod": { "type": "string", "enum": ["cod", "bkash", "nagad", "rocket", "upay", "sslcommerz"] },
+        "paymentLabel": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "paymentVerified": { "type": "boolean" },
+        "trxId": { "type": "string", "maxLength": 80 },
+        "note": { "type": "string", "maxLength": 400 },
+        "adminNote": { "type": "string", "maxLength": 400 },
+        "courierProvider": { "type": "string", "maxLength": 40 },
+        "consignmentId": { "type": "string", "maxLength": 80 },
+        "trackingCode": { "type": "string", "maxLength": 80 },
+        "customerCancelReason": { "type": "string", "maxLength": 300 },
+        "refundRequested": { "type": "boolean" },
+        "refundReason": { "type": "string", "maxLength": 300 },
+        "voucherCode": { "type": "string", "maxLength": 40 },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "discount": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "total": { "type": "number" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Confirmed",
+            "Processing",
+            "Ready to Ship",
+            "Shipped",
+            "Delivered",
+            "Cancelled",
+            "Returned",
+            "Refunded"
+          ]
+        },
+        "dateText": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "orderId",
+        "userId",
+        "customerName",
+        "phone",
+        "address",
+        "zone",
+        "zoneLabel",
+        "paymentMethod",
+        "paymentLabel",
+        "items",
+        "subtotal",
+        "discount",
+        "deliveryFee",
+        "total",
+        "status",
+        "dateText",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Voucher": {
+      "title": "Voucher",
+      "description": "Discount coupon code managed by admin.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "minLength": 2, "maxLength": 32 },
+        "title": { "type": "string", "minLength": 2, "maxLength": 140 },
+        "discount": { "type": "number" },
+        "minSpend": { "type": "number" },
+        "expiry": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["code", "title", "discount", "minSpend", "expiry", "active", "createdAt", "updatedAt"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Global storefront, accounting rules, SEO, gateway, and courier settings.",
+      "type": "object",
+      "properties": {
+        "noticeText": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "popupTitle": { "type": "string", "minLength": 1, "maxLength": 180 },
+        "popupBody": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "popupEnabled": { "type": "boolean" },
+        "dhakaDeliveryFee": { "type": "number" },
+        "outsideDeliveryFee": { "type": "number" },
+        "freeShippingMin": { "type": "number" },
+        "freeDeliveryCampaignActive": { "type": "boolean" },
+        "bkashMerchant": { "type": "string", "maxLength": 30 },
+        "nagadMerchant": { "type": "string", "maxLength": 30 },
+        "rocketMerchant": { "type": "string", "maxLength": 30 },
+        "sslcommerzEnabled": { "type": "boolean" },
+        "steadfastEnabled": { "type": "boolean" },
+        "pathaoEnabled": { "type": "boolean" },
+        "redxEnabled": { "type": "boolean" },
+        "ecourierEnabled": { "type": "boolean" },
+        "fbPixelId": { "type": "string", "maxLength": 64 },
+        "ga4MeasurementId": { "type": "string", "maxLength": 64 },
+        "gtmContainerId": { "type": "string", "maxLength": 64 },
+        "metaCapiEnabled": { "type": "boolean" },
+        "gmcFeedEnabled": { "type": "boolean" },
+        "smsGatewayEnabled": { "type": "boolean" },
+        "emailCampaignEnabled": { "type": "boolean" },
+        "storeName": { "type": "string", "maxLength": 140 },
+        "storePhone": { "type": "string", "maxLength": 40 },
+        "storeEmail": { "type": "string", "maxLength": 160 },
+        "storeAddress": { "type": "string", "maxLength": 300 },
+        "taxRatePercent": { "type": "number" },
+        "packagingCostPerOrder": { "type": "number" },
+        "gatewayFeePercent": { "type": "number" },
+        "seoTitle": { "type": "string", "maxLength": 160 },
+        "seoDescription": { "type": "string", "maxLength": 300 },
+        "seoKeywords": { "type": "string", "maxLength": 300 },
+        "maintenanceMode": { "type": "boolean" },
+        "heroBanners": { "type": "array" },
+        "websiteTemplate": {
+          "type": "string",
+          "enum": [
+            "daraz-mall",
+            "modern-minimal",
+            "artisan-heritage",
+            "compact-wholesale",
+            "festive-ramadan",
+            "flash-superstore",
+            "single-product-funnel",
+            "luxury-boutique"
+          ]
+        },
+        "productCardDesign": {
+          "type": "string",
+          "enum": [
+            "classic-mall",
+            "rounded-glass",
+            "minimal-editorial",
+            "bold-promo",
+            "compact-quickshop",
+            "luxury-framed",
+            "wholesale-tier",
+            "video-spotlight"
+          ]
+        },
+        "themePreset": {
+          "type": "string",
+          "enum": [
+            "daraz-orange",
+            "emerald-sunnah",
+            "royal-indigo",
+            "gold-heritage",
+            "crimson-mart",
+            "midnight-gold",
+            "tea-garden",
+            "sundarban-honey",
+            "ocean-teal",
+            "plum-bazaar"
+          ]
+        },
+        "primaryColor": { "type": "string", "maxLength": 20 },
+        "secondaryColor": { "type": "string", "maxLength": 20 },
+        "accentColor": { "type": "string", "maxLength": 20 },
+        "backgroundColor": { "type": "string", "maxLength": 20 },
+        "headerStyle": {
+          "type": "string",
+          "enum": [
+            "solid-white",
+            "brand-gradient",
+            "clean-editorial",
+            "dark-luxury",
+            "floating-glass",
+            "compact-centered"
+          ]
+        },
+        "heroStyle": {
+          "type": "string",
+          "enum": ["classic-mega", "full-bleed", "split-spotlight", "bento-promo"]
+        },
+        "categoryStyle": {
+          "type": "string",
+          "enum": ["grid-cards", "scroll-rail", "compact-tabs", "showcase-tiles"]
+        },
+        "footerStyle": {
+          "type": "string",
+          "enum": ["daraz-3tier", "dark-executive", "minimal-clean", "newsletter-split"]
+        },
+        "fontStyle": {
+          "type": "string",
+          "enum": ["plus-jakarta", "hind-bengali", "serif-luxury", "compact-commerce"]
+        },
+        "updatedBy": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "noticeText",
+        "popupTitle",
+        "popupBody",
+        "popupEnabled",
+        "dhakaDeliveryFee",
+        "outsideDeliveryFee",
+        "freeShippingMin",
+        "updatedBy",
+        "updatedAt"
+      ]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Private authenticated user profile.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "email": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "phoneVerified": { "type": "boolean" },
+        "avatarUrl": { "type": "string", "maxLength": 500 },
+        "division": { "type": "string", "maxLength": 80 },
+        "district": { "type": "string", "maxLength": 80 },
+        "upazila": { "type": "string", "maxLength": 100 },
+        "address": { "type": "string", "maxLength": 300 },
+        "gender": { "type": "string", "maxLength": 30 },
+        "dateOfBirth": { "type": "string", "maxLength": 30 },
+        "bio": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "displayName", "createdAt", "updatedAt"]
+    },
+    "SavedAddress": {
+      "title": "SavedAddress",
+      "description": "User's private shipping address stored under users/{userId}/addresses.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "fullName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "phone": { "type": "string", "minLength": 6, "maxLength": 30 },
+        "region": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "area": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "addressLine": { "type": "string", "minLength": 2, "maxLength": 300 },
+        "label": { "type": "string", "enum": ["HOME", "OFFICE"] },
+        "isDefaultShipping": { "type": "boolean" },
+        "isDefaultBilling": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "userId",
+        "fullName",
+        "phone",
+        "region",
+        "area",
+        "addressLine",
+        "label",
+        "isDefaultShipping",
+        "isDefaultBilling",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized admin/staff RBAC document keyed by Firebase UID.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "email": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "role": {
+          "type": "string",
+          "enum": [
+            "Super Admin",
+            "Admin",
+            "Manager",
+            "Accountant",
+            "Order Manager",
+            "Inventory Manager",
+            "Product Manager",
+            "Marketing Manager",
+            "Customer Support",
+            "Delivery Manager"
+          ]
+        },
+        "permissions": { "type": "array" },
+        "branchId": { "type": "string", "maxLength": 80 },
+        "addedBy": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "name", "addedBy", "createdAt"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Customer product review.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "productId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "author": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "location": { "type": "string", "maxLength": 100 },
+        "rating": { "type": "number" },
+        "comment": { "type": "string", "minLength": 3, "maxLength": 800 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "productId", "userId", "author", "rating", "comment", "createdAt"]
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "description": "Organic farm, apiary, or ghani supplier record managed by admin.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "phone": { "type": "string", "minLength": 6, "maxLength": 30 },
+        "location": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "suppliedItems": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "lastBatchDate": { "type": "string", "maxLength": 60 },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "phone", "location", "suppliedItems", "active", "createdAt", "updatedAt"]
+    },
+    "Subscriber": {
+      "title": "Subscriber",
+      "description": "Newsletter email subscriber.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "email": { "type": "string", "minLength": 5, "maxLength": 160 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "email", "createdAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Immutable admin security and audit trail.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "actorUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "actorEmail": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "action": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "target": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "details": { "type": "string", "maxLength": 400 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "actorUid", "actorEmail", "action", "target", "createdAt"]
+    },
+    "PaymentTransaction": {
+      "title": "PaymentTransaction",
+      "description": "Verified payment transaction record preventing duplicate TrxID reuse.",
+      "type": "object",
+      "properties": {
+        "trxId": { "type": "string", "minLength": 4, "maxLength": 80 },
+        "orderId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "provider": { "type": "string", "enum": ["bkash", "nagad", "rocket", "upay", "sslcommerz"] },
+        "amount": { "type": "number" },
+        "verified": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["trxId", "orderId", "userId", "provider", "amount", "verified", "createdAt"]
+    },
+    "CourierParcel": {
+      "title": "CourierParcel",
+      "description": "Dispatched courier parcel consignment record.",
+      "type": "object",
+      "properties": {
+        "consignmentId": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "orderId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "provider": { "type": "string", "enum": ["Steadfast", "Pathao", "RedX", "eCourier"] },
+        "trackingCode": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "status": { "type": "string", "minLength": 2, "maxLength": 60 },
+        "codAmount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["consignmentId", "orderId", "provider", "trackingCode", "status", "codAmount", "createdAt", "updatedAt"]
+    },
+    "Warehouse": {
+      "title": "Warehouse",
+      "description": "Multi-branch warehouse or fulfillment hub.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "name": { "type": "string", "minLength": 2, "maxLength": 140 },
+        "branchCode": { "type": "string", "minLength": 2, "maxLength": 40 },
+        "location": { "type": "string", "minLength": 2, "maxLength": 200 },
+        "managerName": { "type": "string", "maxLength": 120 },
+        "isDefault": { "type": "boolean" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "branchCode", "location", "isDefault", "active", "createdAt", "updatedAt"]
+    },
+    "StockMovement": {
+      "title": "StockMovement",
+      "description": "Auditable inventory movement, batch & expiry record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "productId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "productName": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "warehouseId": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "type": { "type": "string", "enum": ["in", "out", "adjustment", "transfer", "return"] },
+        "qtyChange": { "type": "number" },
+        "batchNo": { "type": "string", "maxLength": 80 },
+        "expiryDate": { "type": "string", "maxLength": 40 },
+        "reason": { "type": "string", "minLength": 2, "maxLength": 240 },
+        "actorEmail": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "productId", "productName", "warehouseId", "type", "qtyChange", "reason", "actorEmail", "createdAt"]
+    },
+    "PurchaseOrder": {
+      "title": "PurchaseOrder",
+      "description": "Supplier purchase order and payable ledger record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "poNumber": { "type": "string", "minLength": 2, "maxLength": 64 },
+        "supplierId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "supplierName": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "itemsSummary": { "type": "string", "minLength": 2, "maxLength": 300 },
+        "totalCost": { "type": "number" },
+        "paidAmount": { "type": "number" },
+        "dueAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Ordered", "Received", "Returned", "Settled"] },
+        "dateText": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "poNumber", "supplierId", "supplierName", "itemsSummary", "totalCost", "paidAmount", "dueAmount", "status", "dateText", "createdAt", "updatedAt"]
+    },
+    "AccountingEntry": {
+      "title": "AccountingEntry",
+      "description": "Auditable double-check ERP cashbook income and expense ledger entry.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "category": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "orderId": { "type": "string", "maxLength": 64 },
+        "amount": { "type": "number" },
+        "accountName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "description": { "type": "string", "minLength": 2, "maxLength": 300 },
+        "dateText": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "createdBy": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "type", "category", "amount", "accountName", "description", "dateText", "createdBy", "createdAt"]
+    },
+    "Employee": {
+      "title": "Employee",
+      "description": "Staff HR profile, department, attendance & salary payroll record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "email": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "phone": { "type": "string", "minLength": 6, "maxLength": 30 },
+        "department": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "designation": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "salary": { "type": "number" },
+        "attendanceDays": { "type": "number" },
+        "leaveDays": { "type": "number" },
+        "status": { "type": "string", "enum": ["Active", "On Leave", "Inactive"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "email", "phone", "department", "designation", "salary", "attendanceDays", "leaveDays", "status", "createdAt", "updatedAt"]
+    },
+    "CmsPage": {
+      "title": "CmsPage",
+      "description": "CMS informational page or blog article with SEO metadata.",
+      "type": "object",
+      "properties": {
+        "slug": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "title": { "type": "string", "minLength": 2, "maxLength": 180 },
+        "type": { "type": "string", "enum": ["page", "blog"] },
+        "content": { "type": "string", "minLength": 5, "maxLength": 8000 },
+        "metaTitle": { "type": "string", "maxLength": 160 },
+        "metaDescription": { "type": "string", "maxLength": 300 },
+        "published": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["slug", "title", "type", "content", "published", "updatedAt"]
+    },
+    "CustomerCrm": {
+      "title": "CustomerCrm",
+      "description": "Customer CRM & Wholesale account approval profile.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "phone": { "type": "string", "minLength": 6, "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 160 },
+        "businessName": { "type": "string", "maxLength": 160 },
+        "group": { "type": "string", "enum": ["Regular", "VIP", "Wholesale"] },
+        "wholesaleRequested": { "type": "boolean" },
+        "wholesaleApproved": { "type": "boolean" },
+        "creditDue": { "type": "number" },
+        "notes": { "type": "string", "maxLength": 400 },
+        "blocked": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "phone", "group", "wholesaleApproved", "creditDue", "blocked", "createdAt", "updatedAt"]
+    },
+    "AdminNotification": {
+      "title": "AdminNotification",
+      "description": "Real-time admin order, stock, and refund alert.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "type": { "type": "string", "enum": ["order", "stock", "refund", "system"] },
+        "title": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "message": { "type": "string", "minLength": 2, "maxLength": 300 },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "type", "title", "message", "read", "createdAt"]
+    },
+    "VendorStore": {
+      "title": "VendorStore",
+      "description": "Public storefront profile & performance scorecard for verified multi-vendor sellers (non-PII).",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "ownerUid": { "type": "string", "maxLength": 128 },
+        "storeName": { "type": "string", "minLength": 2, "maxLength": 140 },
+        "slug": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "tier": { "type": "string", "enum": ["Standard", "Official Mall"] },
+        "kycStatus": { "type": "string", "enum": ["Pending", "Verified", "Rejected"] },
+        "location": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "commissionRate": { "type": "number" },
+        "positiveRatingPercent": { "type": "number" },
+        "shipOnTimePercent": { "type": "number" },
+        "chatResponsePercent": { "type": "number" },
+        "walletBalance": { "type": "number" },
+        "totalSales": { "type": "number" },
+        "followersCount": { "type": "number" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "storeName",
+        "slug",
+        "tier",
+        "kycStatus",
+        "location",
+        "commissionRate",
+        "positiveRatingPercent",
+        "shipOnTimePercent",
+        "chatResponsePercent",
+        "walletBalance",
+        "totalSales",
+        "followersCount",
+        "active",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "VendorKyc": {
+      "title": "VendorKyc",
+      "description": "Private seller KYC documents (NID, Trade License, TIN/BIN, phone) isolated from public reads.",
+      "type": "object",
+      "properties": {
+        "vendorId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "ownerUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "ownerEmail": { "type": "string", "maxLength": 160 },
+        "nidNumber": { "type": "string", "minLength": 6, "maxLength": 40 },
+        "tradeLicense": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "tinBin": { "type": "string", "maxLength": 80 },
+        "phone": { "type": "string", "minLength": 6, "maxLength": 30 },
+        "kycStatus": { "type": "string", "enum": ["Pending", "Verified", "Rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["vendorId", "ownerUid", "nidNumber", "tradeLicense", "phone", "kycStatus", "createdAt", "updatedAt"]
+    },
+    "SubOrder": {
+      "title": "SubOrder",
+      "description": "Vendor-split sub-order created from a multi-vendor checkout.",
+      "type": "object",
+      "properties": {
+        "subOrderId": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "parentOrderId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "sellerId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "sellerOwnerUid": { "type": "string", "maxLength": 128 },
+        "sellerName": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "customerName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "phone": { "type": "string", "minLength": 6, "maxLength": 30 },
+        "address": { "type": "string", "minLength": 3, "maxLength": 400 },
+        "district": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "shippingFee": { "type": "number" },
+        "commissionRate": { "type": "number" },
+        "commissionAmount": { "type": "number" },
+        "sellerNetPayout": { "type": "number" },
+        "status": {
+          "type": "string",
+          "enum": ["Pending", "Confirmed", "Processing", "Ready to Ship", "Shipped", "Delivered", "Cancelled", "Returned", "Refunded"]
+        },
+        "courierProvider": { "type": "string", "maxLength": 40 },
+        "consignmentId": { "type": "string", "maxLength": 80 },
+        "trackingCode": { "type": "string", "maxLength": 80 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "subOrderId",
+        "parentOrderId",
+        "sellerId",
+        "sellerName",
+        "userId",
+        "customerName",
+        "phone",
+        "address",
+        "district",
+        "items",
+        "subtotal",
+        "shippingFee",
+        "commissionRate",
+        "commissionAmount",
+        "sellerNetPayout",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ProductQuestion": {
+      "title": "ProductQuestion",
+      "description": "Buyer-Seller Q&A entry displayed on Product Detail Pages.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "productId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "sellerId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "authorName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "question": { "type": "string", "minLength": 3, "maxLength": 400 },
+        "answer": { "type": "string", "maxLength": 600 },
+        "answeredBy": { "type": "string", "maxLength": 120 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "productId", "sellerId", "authorName", "userId", "question", "createdAt", "updatedAt"]
+    },
+    "SellerPayout": {
+      "title": "SellerPayout",
+      "description": "Seller earnings withdrawal and Super Admin settlement record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "sellerId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "ownerUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "sellerName": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "amount": { "type": "number" },
+        "method": { "type": "string", "enum": ["bKash", "Nagad", "Bank Transfer"] },
+        "accountNumber": { "type": "string", "minLength": 5, "maxLength": 60 },
+        "status": { "type": "string", "enum": ["Requested", "Processing", "Paid"] },
+        "periodLabel": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "sellerId", "ownerUid", "sellerName", "amount", "method", "accountNumber", "status", "periodLabel", "createdAt", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Real-time Buyer-Seller chat message persisted for audit & history.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "roomId": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "buyerUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "sellerId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "sellerOwnerUid": { "type": "string", "maxLength": 128 },
+        "sellerName": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "senderRole": { "type": "string", "enum": ["buyer", "seller"] },
+        "senderName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "text": { "type": "string", "minLength": 1, "maxLength": 1000 },
+        "createdAtMs": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "roomId", "buyerUid", "sellerId", "sellerName", "senderRole", "senderName", "text", "createdAtMs", "createdAt"]
+    },
+    "LoyaltyWallet": {
+      "title": "LoyaltyWallet",
+      "description": "User loyalty coins, daily check-in streak, and collected spin vouchers.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "coins": { "type": "number" },
+        "streakDays": { "type": "number" },
+        "lastCheckInDate": { "type": "string", "maxLength": 30 },
+        "lastSpinDate": { "type": "string", "maxLength": 30 },
+        "referralCode": { "type": "string", "minLength": 3, "maxLength": 40 },
+        "collectedVouchers": { "type": "array" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "coins", "streakDays", "lastCheckInDate", "lastSpinDate", "referralCode", "collectedVouchers", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Catalog of pure organic products, public read, admin or verified seller owner write."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer orders, owner or admin read, admin status & courier management."
+    },
+    "/vouchers/{voucherId}": {
+      "schema": { "$ref": "#/entities/Voucher" },
+      "description": "Promo vouchers, public read, admin write."
+    },
+    "/store_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/StoreSettings" },
+      "description": "Global storefront, accounting, SEO, payment, courier, and marketing settings."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private user account profiles."
+    },
+    "/users/{userId}/addresses/{addressId}": {
+      "schema": { "$ref": "#/entities/SavedAddress" },
+      "description": "User's private saved delivery addresses."
+    },
+    "/admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Admin and staff RBAC role registry keyed by Firebase UID."
+    },
+    "/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/Review" },
+      "description": "Customer product reviews."
+    },
+    "/suppliers/{supplierId}": {
+      "schema": { "$ref": "#/entities/Supplier" },
+      "description": "Admin supplier directory."
+    },
+    "/subscribers/{subscriberId}": {
+      "schema": { "$ref": "#/entities/Subscriber" },
+      "description": "Newsletter subscribers."
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Admin security and audit logs."
+    },
+    "/payment_transactions/{trxId}": {
+      "schema": { "$ref": "#/entities/PaymentTransaction" },
+      "description": "Duplicate-protected payment transaction ledger."
+    },
+    "/courier_parcels/{consignmentId}": {
+      "schema": { "$ref": "#/entities/CourierParcel" },
+      "description": "Dispatched courier parcel consignment records."
+    },
+    "/warehouses/{warehouseId}": {
+      "schema": { "$ref": "#/entities/Warehouse" },
+      "description": "Multi-branch warehouse locations."
+    },
+    "/stock_movements/{movementId}": {
+      "schema": { "$ref": "#/entities/StockMovement" },
+      "description": "Inventory stock movement & batch/expiry log."
+    },
+    "/purchases/{purchaseId}": {
+      "schema": { "$ref": "#/entities/PurchaseOrder" },
+      "description": "Supplier purchase orders and payable dues."
+    },
+    "/accounting_entries/{entryId}": {
+      "schema": { "$ref": "#/entities/AccountingEntry" },
+      "description": "ERP financial income & expense cashbook entries."
+    },
+    "/employees/{employeeId}": {
+      "schema": { "$ref": "#/entities/Employee" },
+      "description": "HR employee, attendance & payroll records."
+    },
+    "/cms_pages/{slug}": {
+      "schema": { "$ref": "#/entities/CmsPage" },
+      "description": "CMS pages & blog articles."
+    },
+    "/customers_crm/{customerId}": {
+      "schema": { "$ref": "#/entities/CustomerCrm" },
+      "description": "Customer CRM profiles & wholesale approval status."
+    },
+    "/admin_notifications/{notifId}": {
+      "schema": { "$ref": "#/entities/AdminNotification" },
+      "description": "Admin order, stock, and system notifications."
+    },
+    "/vendors/{vendorId}": {
+      "schema": { "$ref": "#/entities/VendorStore" },
+      "description": "Public vendor storefronts and performance metrics (non-PII)."
+    },
+    "/vendor_kyc/{vendorId}": {
+      "schema": { "$ref": "#/entities/VendorKyc" },
+      "description": "Private seller KYC documents isolated to vendor owner and admins."
+    },
+    "/sub_orders/{subOrderId}": {
+      "schema": { "$ref": "#/entities/SubOrder" },
+      "description": "Multi-vendor split sub-orders with commission and fulfillment tracking."
+    },
+    "/product_questions/{questionId}": {
+      "schema": { "$ref": "#/entities/ProductQuestion" },
+      "description": "Buyer-seller product Q&A threads."
+    },
+    "/seller_payouts/{payoutId}": {
+      "schema": { "$ref": "#/entities/SellerPayout" },
+      "description": "Seller earnings withdrawal & admin settlement requests."
+    },
+    "/chat_messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Persisted buyer-seller real-time chat history."
+    },
+    "/loyalty_wallets/{userId}": {
+      "schema": { "$ref": "#/entities/LoyaltyWallet" },
+      "description": "Customer loyalty coins, streak, and collected vouchers."
+    }
+  }
+}
