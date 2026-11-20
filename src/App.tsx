@@ -1790,6 +1790,24 @@ export default function App() {
     return prioritized.slice(0, justForYouCount);
   }, [activeProducts, recentlyViewedProducts, justForYouCount]);
 
+  const orderedHomepageSections = useMemo(() => {
+    const raw =
+      themeAdvanced.sections && themeAdvanced.sections.length > 0
+        ? themeAdvanced.sections
+        : DEFAULT_THEME_ADVANCED.sections;
+    const catIdx = raw.findIndex((s) => s.id === 'categories');
+    const heroIdx = raw.findIndex((s) => s.id === 'hero');
+    const shortcutsIdx = raw.findIndex((s) => s.id === 'shortcuts');
+    // Ensure Categories sits right below Hero (matching falaqfood.com homepage flow)
+    if (catIdx > heroIdx + 1 && shortcutsIdx === heroIdx + 1) {
+      const next = [...raw];
+      const [catItem] = next.splice(catIdx, 1);
+      next.splice(heroIdx + 1, 0, catItem);
+      return next;
+    }
+    return raw;
+  }, [themeAdvanced.sections]);
+
   // Seller Center Full-Screen View (#seller / /seller)
   if (activeScreen === 'seller') {
     return (
@@ -2189,24 +2207,6 @@ export default function App() {
     (websiteTemplate === 'modern-minimal' ? 'full-bleed' : 'classic-mega');
   const categoryStyle = storeSettings.categoryStyle ?? 'grid-cards';
   const footerStyle = storeSettings.footerStyle ?? 'daraz-3tier';
-
-  const orderedHomepageSections = useMemo(() => {
-    const raw =
-      themeAdvanced.sections && themeAdvanced.sections.length > 0
-        ? themeAdvanced.sections
-        : DEFAULT_THEME_ADVANCED.sections;
-    const catIdx = raw.findIndex((s) => s.id === 'categories');
-    const heroIdx = raw.findIndex((s) => s.id === 'hero');
-    const shortcutsIdx = raw.findIndex((s) => s.id === 'shortcuts');
-    // Ensure Categories sits right below Hero (matching falaqfood.com homepage flow)
-    if (catIdx > heroIdx + 1 && shortcutsIdx === heroIdx + 1) {
-      const next = [...raw];
-      const [catItem] = next.splice(catIdx, 1);
-      next.splice(heroIdx + 1, 0, catItem);
-      return next;
-    }
-    return raw;
-  }, [themeAdvanced.sections]);
 
   const catalogGridGapCls =
     themeAdvanced.gridGap === 'compact'
